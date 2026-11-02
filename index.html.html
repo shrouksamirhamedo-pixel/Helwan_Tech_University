@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>جامعة حلوان الدولية التكنولوجية - جدول الأقسام</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 font-sans min-h-screen">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function App() {
+      const [activeTab, setActiveTab] = React.useState('schedule');
+      const [notice, setNotice] = React.useState('مرحباً بكم في المنصة الرسمية لجدول الكلية - إشراف: شروق سمير السيد حميدو ٢٥٢');
+      const [inputNotice, setInputNotice] = React.useState('');
+
+      return (
+        <div className="min-h-screen pb-10">
+          <header className="bg-slate-900 text-white shadow-md">
+            <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center flex-wrap gap-4">
+              <div>
+                <h1 className="text-lg font-bold">شروق سمير السيد حميدو (٢٥٢)</h1>
+                <p className="text-xs text-emerald-400 font-semibold">أدمن قسم تحكم صناعي - جامعة حلوان الدولية التكنولوجية</p>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => setActiveTab('schedule')} className={`px-4 py-2 rounded-xl text-sm font-bold ${activeTab === 'schedule' ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-300'}`}>
+                  📅 الجدول الدراسي
+                </button>
+                <button onClick={() => setActiveTab('admin')} className={`px-4 py-2 rounded-xl text-sm font-bold ${activeTab === 'admin' ? 'bg-amber-600 text-white' : 'bg-slate-800 text-slate-300'}`}>
+                  🛡️ لوحة الأدمن
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <div className="bg-emerald-600 text-white text-center py-2 px-4 text-sm font-medium shadow-inner">
+            📢 {notice}
+          </div>
+
+          <main className="max-w-6xl mx-auto px-4 mt-6">
+            {activeTab === 'schedule' ? (
+              <div className="space-y-6">
+                <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                  <h2 className="text-xl font-bold text-slate-800 mb-4 border-b pb-2">⚡ جدول قسم تحكم صناعي</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-slate-50 p-4 rounded-xl border">
+                      <h3 className="font-bold text-emerald-700">السبت</h3>
+                      <p className="text-sm text-slate-600 mt-1">دوائر كهربائية متقدمة (مدرج C101)</p>
+                    </div>
+                    <div className="bg-slate-50 p-4 rounded-xl border">
+                      <h3 className="font-bold text-emerald-700">الأحد</h3>
+                      <p className="text-sm text-slate-600 mt-1">إلكترونيات صناعية (مدرج C102)</p>
+                    </div>
+                    <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                      <h3 className="font-bold text-emerald-800">الإثنين والثلاثاء</h3>
+                      <p className="text-sm text-emerald-700 mt-1 font-bold">🌴 ارتاح يابطل</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                <h2 className="text-xl font-bold text-slate-800">🛡️ لوحة تحكم الأدمن (شروق سمير)</h2>
+                <p className="text-sm text-slate-600">تحديث الإعلانات العامة للكلية:</p>
+                <textarea 
+                  value={inputNotice} 
+                  onChange={(e) => setInputNotice(e.target.value)} 
+                  placeholder="اكتب الإعلان الجديد هنا..." 
+                  className="w-full p-3 border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  rows="3"
+                ></textarea>
+                <button 
+                  onClick={() => { if(inputNotice) { setNotice(inputNotice); alert('تم تحديث الإعلان بنجاح!'); } }}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow transition"
+                >
+                  نشر الإعلان فوراً
+                </button>
+              </div>
+            )}
+          </main>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
